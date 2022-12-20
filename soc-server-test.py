@@ -5,6 +5,11 @@ import csv
 HOST = "202.31.134.217" 
 PORT = 2508
 
+def saveData(data):
+    with open('dataset_sensor.csv', 'a', encoding='UTF8') as f:
+        writer =csv.writer(f, delimiter=';')
+        writer.writerow([data["timestamps"], data["temperature"], data["humidity"]])
+        
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST,PORT))
     s.listen()
@@ -21,7 +26,3 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 break
             conn.send(data)
             
-def saveData(data):
-    with open('dataset_sensor.csv', 'a', encoding='UTF8') as f:
-        writer =csv.writer(f, delimiter=';')
-        writer.writerow([data["timestamps"], data["temperature"], data["humidity"]])
