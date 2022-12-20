@@ -1,3 +1,8 @@
+###################################################
+####### Temperature & Humidity client sensor ######
+####### Author: Adinda Riztia Putri ###############
+###################################################
+
 import time
 from time import gmtime, strftime
 import board
@@ -13,19 +18,17 @@ dhtdevice = adafruit_dht.DHT11(board.D23)
 HOST = "202.31.134.217"
 PORT = 2508
 
-# with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-#     s.connect((HOST, PORT))
-
-# s = socket(socket.AF_INET, socket.SOCK_STREAM)
-# s.connect((HOST, PORT))
+# initialize socket connection to server
 s = socket.socket()
 s.connect((HOST, PORT))
 
 while True:
     try:
-        tempCelcius = dhtdevice.temperature
-        humidity = dhtdevice.humidity
-        timestamp = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+        tempCelcius = dhtdevice.temperature #get current temperature reading
+        humidity = dhtdevice.humidity #get current temperature reading
+        timestamp = strftime("%Y-%m-%d %H:%M:%S", gmtime()) #get current time reading
+        
+        # store the data in a json object for easier data handling cia cia ciaa
         sensor_data = {
             "timestamp": timestamp,
             "temperature": tempCelcius,
@@ -33,12 +36,14 @@ while True:
         }
         
         data = json.dumps(sensor_data)
+        
+        #print sensor reading value for log info
         print( timestamp +
             " Temp: {:.1f} C    Humidity: {}% ".format(
                 tempCelcius, humidity
             )
         )
-        s.send(bytes(data,encoding="utf-8"))
+        s.send(bytes(data,encoding="utf-8")) #send the data to remote server
         data = s.recv(1024)
             
         print("dapet data neh ", data)
