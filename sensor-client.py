@@ -12,9 +12,11 @@ dhtdevice = adafruit_dht.DHT11(board.D23)
 HOST = "202.31.134.217"
 PORT = 2508
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.connect((HOST, PORT))
+# with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+#     s.connect((HOST, PORT))
 
+s = socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((HOST, PORT))
 
 while True:
     try:
