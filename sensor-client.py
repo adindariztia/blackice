@@ -12,6 +12,11 @@ while True:
         tempCelcius = dhtdevice.temperature
         humidity = dhtdevice.humidity
         timestamp = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+        print( timestamp +
+            " Temp: {:.1f} C    Humidity: {}% ".format(
+                tempCelcius, humidity
+            )
+        )
     except RuntimeError as error:
         print(error.args[0])
         time.sleep(1)
