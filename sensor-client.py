@@ -3,6 +3,7 @@ from time import gmtime, strftime
 import board
 import adafruit_dht
 import socket
+import json
 
 
 # initialize the sensor
@@ -31,12 +32,13 @@ while True:
             "humidity": humidity
         }
         
+        data = json.dumps(sensor_data)
         print( timestamp +
             " Temp: {:.1f} C    Humidity: {}% ".format(
                 tempCelcius, humidity
             )
         )
-        s.send(sensor_data.encode())
+        s.send(bytes(data,encoding="utf-8"))
         data = s.recv(1024)
             
         print("dapet data neh ", data)
