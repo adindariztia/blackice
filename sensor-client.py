@@ -15,7 +15,9 @@ PORT = 2508
 # with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 #     s.connect((HOST, PORT))
 
-s = socket(socket.AF_INET, socket.SOCK_STREAM)
+# s = socket(socket.AF_INET, socket.SOCK_STREAM)
+# s.connect((HOST, PORT))
+s = socket.socket()
 s.connect((HOST, PORT))
 
 while True:
