@@ -36,7 +36,7 @@ while True:
                 tempCelcius, humidity
             )
         )
-        s.send(b"hai adinda")
+        s.send(sensor_data)
         data = s.recv(1024)
             
         print("dapet data neh ", data)
