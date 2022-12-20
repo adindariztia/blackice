@@ -12,6 +12,14 @@ dhtdevice = adafruit_dht.DHT11(board.D23)
 HOST = "202.31.134.217"
 PORT = 2508
 
+def sendData():
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.connect((HOST, PORT))
+            s.send(b"hai adinda")
+            data = s.recv(1024)
+            
+            print("dapet data neh ", data)
+
 while True:
     try:
         tempCelcius = dhtdevice.temperature
@@ -28,12 +36,7 @@ while True:
                 tempCelcius, humidity
             )
         )
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.connect((HOST, PORT))
-            s.send(b"hai adinda")
-            data = s.recv(1024)
-            
-            print("dapet data neh ", data)
+        sendData()
     except RuntimeError as error:
         print(error.args[0])
         time.sleep(1)
