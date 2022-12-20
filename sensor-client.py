@@ -30,7 +30,7 @@ while True:
         )
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.connect((HOST, PORT))
-            s.sendall(b"hai adinda")
+            s.send(b"hai adinda")
             data = s.recv(1024)
             
             print("dapet data neh ", data)
