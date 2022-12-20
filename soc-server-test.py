@@ -8,7 +8,7 @@ PORT = 2508
 def saveData(data):
     with open('dataset_sensor.csv', 'a', encoding='UTF8') as f:
         writer =csv.writer(f, delimiter=';')
-        writer.writerow([data["timestamps"], data["temperature"], data["humidity"]])
+        writer.writerow([data["timestamp"], data["temperature"], data["humidity"]])
         
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST,PORT))
