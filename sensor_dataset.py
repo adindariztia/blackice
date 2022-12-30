@@ -5,6 +5,7 @@
 
 
 import time
+from datetime import datetime
 from time import gmtime, strftime
 import board
 import adafruit_dht
@@ -16,7 +17,7 @@ import csv
 dhtdevice = adafruit_dht.DHT11(board.D23)
 
 def saveData(data):
-    with open('dht11_dataset_{}.csv'.format(strftime("%Y-%m-%d",gmtime())), 'a', encoding='UTF8') as f:
+    with open('dht11_dataset_{}.csv'.format(strftime("%Y-%m-%d", datetime.now())), 'a', encoding='UTF8') as f:
         writer =csv.writer(f, delimiter=';')
         writer.writerow([data["timestamp"], data["temperature"], data["humidity"]])
 
