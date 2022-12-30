@@ -26,7 +26,7 @@ while True:
     try:
         tempCelcius = dhtdevice.temperature #get current temperature reading
         humidity = dhtdevice.humidity #get current temperature reading
-        timestamp = strftime("%Y-%m-%d %H:%M:%S", gmtime()) #get current time reading
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S") #get current time reading
     
         sensor_data = {
             "timestamp": timestamp,
